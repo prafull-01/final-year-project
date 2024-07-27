@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const secret = "Abc!1234%$#@";
 
-function verifyUser(req, res, next) {
+function verifyStudent(req, res, next) {
   try {
     const token  = req.header("Authorization");
     const result = jwt.verify(token, secret);
@@ -14,5 +14,5 @@ function verifyUser(req, res, next) {
 }
 
 module.exports = {
-  verifyUser,
+  verifyStudent,
 };

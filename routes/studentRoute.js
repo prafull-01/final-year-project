@@ -1,9 +1,9 @@
 const express= require('express');
 const router= express.Router();
-const User= require('../models/user');
+const Student= require('../models/studentModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const {verifyUser} = require('../middlewares/auth');
+const {verifyStudent} = require('../middlewares/auth');
 
 
 
@@ -23,8 +23,8 @@ router.get('/signup',(req,res)=>{
 router.post('/login',async (req,res)=>{
     try {
         const {email,password}=req.body;
-        const user= await User.findOne({email});
-        if(!user){
+        const student= await Student.findOne({email});
+        if(!student){
             return res.send("user not found");
         }
         const matchPassword = await bcrypt.compare(password,user.password);
@@ -43,9 +43,9 @@ router.post('/login',async (req,res)=>{
 
 router.post('/signup',async (req,res)=>{
     try{
-        const {name,email,password}= req.body;
+        const {name,systemId,email,password}= req.body;
         const hashedPassword= await bcrypt.hash(password,10);
-        await User.create({name,email,password:hashedPassword});
+        await Student.create({name,systemId,email,password:hashedPassword});
     }catch(error){
         res.status(400).json(error);
     }
@@ -53,7 +53,7 @@ router.post('/signup',async (req,res)=>{
     res.redirect('login');
 })
 
-router.get('/protected',verifyUser,(req,res)=>{
+router.get('/protected',verifyStudent,(req,res)=>{
     res.send("hello from protected route");
 })
 
