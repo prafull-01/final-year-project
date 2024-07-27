@@ -27,7 +27,7 @@ router.post('/login',async (req,res)=>{
         if(!student){
             return res.send("user not found");
         }
-        const matchPassword = await bcrypt.compare(password,user.password);
+        const matchPassword = await bcrypt.compare(password,student.password);
         if(matchPassword) {
             const token= jwt.sign({email:email},secret);
             res.json({token});
