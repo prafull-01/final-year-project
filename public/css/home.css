@@ -1,0 +1,109 @@
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+input,
+button {
+  font-family: 'Muli', sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
+  outline: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #222222;
+  background-image: url("/assets/imge1.png");
+  background-color: rgba(121, 121, 121, 0.445);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 20px;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  text-align: center;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 4px solid #007bff; /* Blue border for emphasis */
+  margin-bottom: 60px; /* Increased space between header and boxes */
+  border-radius: 10px; /* Rounded corners for header */
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 2em; /* Larger font size */
+  color: #333;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px; /* Increased gap between boxes */
+  margin-bottom: 60px; /* Space before footer */
+}
+
+.admin {
+  height: 250px; /* Box height */
+  width: 250px; /* Box width */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.admin:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+.image {
+  height: 150px;
+  width: 150px;
+  border-radius: 8px;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.title {
+  text-align: center;
+}
+
+.title h2 {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+/* Footer Styles */
+.footer {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  position: absolute;
+  bottom: 0;
+  border-top: 2px solid #007bff; /* Blue border for consistency */
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+}
