@@ -1,62 +1,13 @@
-const express= require('express');
-const router= express.Router();
-const Student= require('../models/studentModel');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const {verify} = require('../middlewares/auth');
 
+const express = require('express');
+const router = express.Router();
+const studentController = require('../controllers/studentController');
+const { verify } = require('../middlewares/auth');
 
+router.get('/login', studentController.getLoginPage);
+router.get('/signup', studentController.getSignupPage);
+router.post('/login', studentController.login);
+router.post('/signup', studentController.signup);
+router.get('/protected', verify, studentController.protectedRoute);
 
-const secret= 'Abc!1234%$#@';
-
-
-
-router.get('/login',(req,res)=>{
-    res.render('studentLogin',{ error: null });
-})
-router.get('/signup',(req,res)=>{
-    res.render('studentSignup');
-})
-
-router.post('/login',async (req,res)=>{
-    try {
-        const {email, password} = req.body;
-        const student = await Student.findOne({email});
-        if (!student) {
-            return res.render('studentLogin', {error: "Invalid email"});
-        }
-        const matchPassword = await bcrypt.compare(password, student.password);
-        if (matchPassword) {
-            const token = jwt.sign({email: email, role: "student"}, secret);
-            res.json({token});
-        } else {
-            return res.render('studentLogin', {error: "Invalid password"});
-        }
-    } catch (error) {
-        console.log(error);
-        res.status(400).json({error});
-    }
-    
-    
-})
-
-router.post('/signup',async (req,res)=>{
-    try{
-        const {name,systemId,email,password}= req.body;
-        const hashedPassword= await bcrypt.hash(password,10);
-        await Student.create({name,systemId,email,password:hashedPassword});
-    }catch(error){
-        res.status(400).json(error);
-    }
-
-    res.redirect('login');
-})
-
-router.get('/protected',verify,(req,res)=>{
-    res.send("hello from protected route");
-})
-
-
-
-
-module.exports=router;
+module.exports = router;
